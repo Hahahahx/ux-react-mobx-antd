@@ -12,7 +12,10 @@ export interface RoutersConfig {
     defaultPath:string
 }
 
-// routers组件的props定义
+/**
+ * routers组件的props定义
+ * routers、isLogin、defaultPath
+ */
 export interface RoutersProps {
     routers: Array<RouterNode>,
     isLogin:boolean,
@@ -26,7 +29,9 @@ export interface RouterContainerProps {
     noMatch:()=>ReactElement|FC|ComponentElement<any, any>
 }
 
-// routers中的每个节点定义
+/**
+ * routers中的每个节点定义
+ */
 export interface RouterNode {
     urlPath: string,
     componentPath: string,
@@ -34,18 +39,24 @@ export interface RouterNode {
     childRoutes?: Array<RouterNode>
 }
 
-// 懒加载组件props定义
+/**
+ * 懒加载组件props定义
+ */
 export interface LazyComponentProps {
     componentPath:string
     hasChild?:RoutersProps
 }
 
-// 懒加载路由
+/**
+ * 懒加载路由
+ */
 export interface LazyRouteProps extends LazyComponentProps{
     urlPath: string
 }
 
-// 鉴权组件props定义
+/**
+ * 鉴权组件props定义
+ */
 export interface PrivateRouteProps extends LazyRouteProps{
     defaultUrlPath:string,
     hasAuthority:boolean,

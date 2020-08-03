@@ -3,10 +3,10 @@ const { getLessVars } = require('antd-theme-generator');
 const path = require("path");
 const fs = require("fs");
 
-const stylePath = path.resolve(__dirname,'./src/assets/style');
+const stylePath = '../src/assets/style';
 const globalVars  = path.join(stylePath,'./vars.less')
 
-const themeVariables = getLessVars(path.join(__dirname, globalVars))
+const themeVariables = getLessVars(path.resolve(__dirname, globalVars))
 const defaultVars = getLessVars('./node_modules/antd/lib/style/themes/default.less')
 const darkVars = { ...getLessVars('./node_modules/antd/lib/style/themes/dark.less'), '@primary-color': defaultVars['@primary-color'] };
 const lightVars = { ...getLessVars('./node_modules/antd/lib/style/themes/compact.less'), '@primary-color': defaultVars['@primary-color'] };
@@ -28,4 +28,4 @@ const options = {
 
 const AntdThemePlugin = require('antd-theme-webpack-plugin');
 
-export const AntdThemePlugin =  new AntdThemePlugin(options)
+module.exports =  new AntdThemePlugin(options)

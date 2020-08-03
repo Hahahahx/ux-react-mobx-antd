@@ -21,7 +21,7 @@ interface WebsocketProps {
 export const WebSocket: FC<WebsocketProps> = ({wsList, config, children}) => {
     const map = new Map();
     // 根据链接生成每个对象
-    wsList.map(link => {
+    wsList.forEach(link => {
         map.set(link, new Socket(link, 5000, config));
     });
     return (

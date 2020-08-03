@@ -1,8 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {RouterContainerProps, RouterNode} from '@/components/Router/index';
 import {Routers} from '@/components/Router/Routers';
-import {routerConfig} from '@/config/routerConfig';
-import {BrowserRouter,Route} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 /**
  * @File: RouterContainer
  * @Author: Ux
@@ -19,7 +18,7 @@ export const RouterContainer:FC<RouterContainerProps> =({routers, isLogin, defau
 
     return (
         <BrowserRouter>
-            <Routers routers={routerConfig.routers} isLogin={false} defaultPath={routerConfig.defaultPath} />
+            <Routers routers={routers} isLogin={isLogin} defaultPath={defaultPath} />
             {
                 !path && noMatch()
             }

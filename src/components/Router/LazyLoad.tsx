@@ -20,7 +20,8 @@ import Loadable from 'react-loadable'
 export const LazyComponent: FC<LazyComponentProps> = ({componentPath, hasChild}) => {
     const Async = Loadable({
         loader: () => import(`@/${componentPath}`),
-        loading: ()=>  <LoadingPage/>
+        loading: ()=>  <LoadingPage/>,
+        delay: 300, // 0.3 seconds
     })
 
     return hasChild

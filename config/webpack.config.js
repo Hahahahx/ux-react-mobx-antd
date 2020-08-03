@@ -29,7 +29,7 @@ const AntdDayJsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
 // 自定义主题配置
-const { AntdThemePlugin } = require('./atndThemePlugin');
+const AntdThemePlugin = require('./antdThemePlugin');
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -116,19 +116,19 @@ module.exports = function (webpackEnv) {
       },
     ].filter(Boolean);
     if (preProcessor) {
-      const isLessOptions = 
-      preProcessor === 'less-loader'
-        ? {
-          lessOptions: {
-            modifyVars:{
+      const isLessOptions =
+        preProcessor === 'less-loader'
+          ? {
+            lessOptions: {
+              modifyVars: {
 
+              },
+              javascriptEnabled: true,
             },
-            javascriptEnabled: true,
-          },
-          sourceMap: true
-        } : {
-          sourceMap: true
-        }
+            sourceMap: true
+          } : {
+            sourceMap: true
+          }
       loaders.push(
         {
           loader: require.resolve('resolve-url-loader'),

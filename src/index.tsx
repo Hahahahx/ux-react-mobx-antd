@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from '@/components/Provider/Provider';
+import { WebSocket } from '@/components/WebSocket/WebSocket';
+import { wsList, config } from '@/config/websocketConfig';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider>
+    <WebSocket wsList={wsList} config={config} >
+        <App />
+    </WebSocket>
+  </Provider>,
   document.getElementById('root')
 );
 
