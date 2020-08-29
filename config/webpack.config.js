@@ -30,6 +30,7 @@ const AntdDayJsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const postcssNormalize = require('postcss-normalize');
 // 自定义主题配置
 const AntdThemePlugin = require('./antdThemePlugin');
+const RouterPlugin = require('./routerPlugin');
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -307,6 +308,8 @@ module.exports = function (webpackEnv) {
         .map(ext => `.${ext}`)
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
+        '@': paths.appSrc,
+        '@assets': path.join(paths.appSrc, '/assets'),
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
@@ -557,6 +560,11 @@ module.exports = function (webpackEnv) {
       ],
     },
     plugins: [
+      // 自定义路由配置插件
+      new RouterPlugin({
+        pagePath: path.join(paths.appSrc, 'pages'),
+        output:path.join(paths.appSrc,'config')
+      }),
       // antd时间插件momentjs替换为dayjs，减小包大小
       new AntdDayJsWebpackPlugin(),
       // Generates an `index.html` file with the <script> injected.

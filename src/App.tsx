@@ -1,14 +1,15 @@
 import React from 'react';
-import {Button } from 'antd';
+import logo from './logo.svg';
 import './App.less';
+import { useStore } from '@/components/Provider';
+import Selection from '@/components/Selection/Selection';
+import { RouterContainer } from '@/components/RouterContainer/RouterContainer';
 
 function App() {
   return (
-    <div className="App">
-      <img src=''></img>
-      <Button> btt</Button>
-    </div>
+    <RouterContainer/>
   );
 }
 
 export default App;
+ 

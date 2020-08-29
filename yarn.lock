@@ -3514,7 +3514,7 @@ core-js@^2.4.0:
   resolved "https://registry.npm.taobao.org/core-js/download/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha1-OIMUafmSK97Y7iHJ3EaYXgOZMIw=
 
-core-js@^3.5.0:
+core-js@^3.5.0, core-js@^3.6.5:
   version "3.6.5"
   resolved "https://registry.npm.taobao.org/core-js/download/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha1-c5XcJzrzf7LlDpvT2f6EEoUjHRo=
@@ -3612,6 +3612,11 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+crypto-js@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/crypto-js/download/crypto-js-4.0.0.tgz#2904ab2677a9d042856a2ea2ef80de92e4a36dcc"
+  integrity sha1-KQSrJnep0EKFai6i74DekuSjbcw=
 
 css-blank-pseudo@^0.1.4:
   version "0.1.4"
@@ -7324,10 +7329,10 @@ mobx-react-lite@^2.0.7:
   resolved "https://registry.npm.taobao.org/mobx-react-lite/download/mobx-react-lite-2.0.7.tgz#1bfb3b4272668e288047cf0c7940b14e91cba284"
   integrity sha1-G/s7QnJmjiiAR88MeUCxTpHLooQ=
 
-mobx@^5.15.4:
-  version "5.15.4"
-  resolved "https://registry.npm.taobao.org/mobx/download/mobx-5.15.4.tgz#9da1a84e97ba624622f4e55a0bf3300fb931c2ab"
-  integrity sha1-naGoTpe6YkYi9OVaC/MwD7kxwqs=
+mobx@^4.14.0:
+  version "4.15.6"
+  resolved "https://registry.npm.taobao.org/mobx/download/mobx-4.15.6.tgz#c3de77ab272f7074720914070370335fb68cfcda"
+  integrity sha1-w953qycvcHRyCRQHA3AzX7aM/No=
 
 moment@^2.24.0, moment@^2.25.3:
   version "2.27.0"

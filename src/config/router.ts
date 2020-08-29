@@ -1,0 +1,28 @@
+import Page from '@/pages/index.tsx';
+// 自动装配路由映射表
+export const routeConfig = [
+    {
+        path: '',
+        noLazy: true,
+        child: [
+            {
+                path: '/login',
+                authority: true,
+                child: [],
+                componentPath: 'pages/login/index.tsx'
+            },
+            {
+                child: [],
+                componentPath: 'pages/main/index.tsx',
+                path: '/main'
+            },
+            {
+                child: [],
+                componentPath: 'pages/some/index.tsx',
+                path: '/some'
+            }
+        ],
+        componentPath: 'pages/index.tsx',
+        component: Page
+    }
+]

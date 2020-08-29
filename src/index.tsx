@@ -1,3 +1,9 @@
+import 'core-js/es';
+import 'core-js/es/symbol';
+import 'core-js/es/map';
+import 'core-js/es/set';
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -10,7 +16,7 @@ import { wsList, config } from '@/config/websocketConfig';
 ReactDOM.render(
   <Provider>
     <WebSocket wsList={wsList} config={config} >
-        <App />
+      <App />
     </WebSocket>
   </Provider>,
   document.getElementById('root')
