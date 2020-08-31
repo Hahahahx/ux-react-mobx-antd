@@ -6,10 +6,11 @@ export const routeConfig = [
         noLazy: true,
         child: [
             {
-                path: '/login',
                 authority: true,
+                default: true,
                 child: [],
-                componentPath: 'pages/login/index.tsx'
+                componentPath: 'pages/login/index.tsx',
+                path: '/login'
             },
             {
                 child: [],

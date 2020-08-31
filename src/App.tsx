@@ -1,15 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, HashRouter, Redirect } from 'react-router-dom';
+import { Routers } from './components/RouterContainer/Routers';
+import { routeConfig } from '@/config/router';
 import './App.less';
-import { useStore } from '@/components/Provider';
-import Selection from '@/components/Selection/Selection';
-import { RouterContainer } from '@/components/RouterContainer/RouterContainer';
+import NoMatch from './pages/__Component/NoMatch';
 
 function App() {
   return (
-    <RouterContainer/>
+    <HashRouter>
+      <Routers
+        routers={routeConfig}
+        noMatch={
+          () => <NoMatch/>
+        }
+        intercept={(route) => {
+
+        }} />
+    </HashRouter>
   );
 }
 
 export default App;
- 

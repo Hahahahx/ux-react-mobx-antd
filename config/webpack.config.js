@@ -158,6 +158,7 @@ module.exports = function (webpackEnv) {
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
+      'core-js/es', 'react-app-polyfill/ie9', 'react-app-polyfill/stable',
       // Include an alternative client for WebpackDevServer. A client's job is to
       // connect to WebpackDevServer by a socket and get notified about changes.
       // When you save a file, the client will either apply hot updates (in case
@@ -563,7 +564,7 @@ module.exports = function (webpackEnv) {
       // 自定义路由配置插件
       new RouterPlugin({
         pagePath: path.join(paths.appSrc, 'pages'),
-        output:path.join(paths.appSrc,'config')
+        output: path.join(paths.appSrc, 'config')
       }),
       // antd时间插件momentjs替换为dayjs，减小包大小
       new AntdDayJsWebpackPlugin(),

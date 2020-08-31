@@ -3,7 +3,7 @@ import { usePageStore } from '@/components/Provider/PageProvider'
 
 
 
-const Main = () => {
+const NoMatch = () => {
 
     const { setLoading } = usePageStore(({ PageModule }) => ({
         setLoading: PageModule.setLoading
@@ -14,9 +14,9 @@ const Main = () => {
     }, [])
 
 
-    return <div className='page'>Main-Page</div>
+    return <div className='page'>NoMatch-404</div>
 }
 
 
 
-export default React.memo(Main, () => true);
+export default React.memo(NoMatch, () => true);

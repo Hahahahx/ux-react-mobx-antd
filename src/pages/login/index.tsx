@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { usePageStore } from '@/components/Provider/PageProvider';
 
 
-const Login =()=><>login</>
+const Login = () => {
+
+    const { setLoading } = usePageStore(({ PageModule }) => ({
+        setLoading: PageModule.setLoading
+    }))
+
+    useEffect(() => {
+        setLoading(false)
+    }, [])
 
 
-export default Login;
+    return <div className='page'>Login-Page</div>
+}
+
+
+export default React.memo(Login, () => true);

@@ -1,24 +1,21 @@
-import 'core-js/es';
-import 'core-js/es/symbol';
-import 'core-js/es/map';
-import 'core-js/es/set';
-import 'react-app-polyfill/ie9';
-import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from '@/components/Provider/Provider';
+import { BusinessProvider } from '@/components/Provider/BusinessProvider/BusinessProvider';
 import { WebSocket } from '@/components/WebSocket/WebSocket';
 import { wsList, config } from '@/config/websocketConfig';
+import { PageProvider } from './components/Provider/PageProvider/PageProvieder';
+import './index.less';
 
 ReactDOM.render(
-  <Provider>
-    <WebSocket wsList={wsList} config={config} >
-      <App />
-    </WebSocket>
-  </Provider>,
+  <PageProvider>
+    <BusinessProvider>
+      <WebSocket wsList={wsList} config={config} >
+        <App />
+      </WebSocket>
+    </BusinessProvider>
+  </PageProvider>,
   document.getElementById('root')
 );
 
