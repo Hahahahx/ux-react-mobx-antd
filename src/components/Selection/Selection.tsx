@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, MutableRefObject, useContext, useState, useRef, useMemo } from 'react';
+import React, { FC, useState, useRef, useMemo } from 'react';
 import { useDocumentEvent, useMousePosition } from '@/utils/HookUtils';
 import { SelectionContext, store } from '@/components/Selection/index';
 import SelectFrame from '@/components/Selection/SelectFrame';
@@ -67,14 +67,14 @@ const Selection: FC<SelectionProps> = ({ children, disabledSelection, offset, sc
                 setStart({ x, y });
                 setLock(false);
                 onBegin && onBegin({ x, y });
-                // 展示选框
-                setShow(true);
             }
         }
     };
 
     const onMouseMove = () => {
         if (!lock) {
+            // 展示选框
+            !show && setShow(true) 
             // 选框的偏移值是取决于左上角的点，所以只有更小（更接近0，0）的坐标能取决其偏移值
             const left = Math.min(x, start.x);
             const top = Math.min(y, start.y);
@@ -101,13 +101,6 @@ const Selection: FC<SelectionProps> = ({ children, disabledSelection, offset, sc
     useDocumentEvent('mousedown', onMouseDown);
     useDocumentEvent('mousemove', onMouseMove);
     useDocumentEvent('mouseup', onMouseUp);
-
-    const style: CSSProperties = {
-        width: '100%',
-        height: '100%',
-        position: 'relative'
-    };
-
 
     // 为了避免高频渲染，你应该在children组件中加入memo
     return (

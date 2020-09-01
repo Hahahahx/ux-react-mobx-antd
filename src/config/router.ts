@@ -16,11 +16,6 @@ export const routeConfig = [
                 child: [],
                 componentPath: 'pages/main/index.tsx',
                 path: '/main'
-            },
-            {
-                child: [],
-                componentPath: 'pages/some/index.tsx',
-                path: '/some'
             }
         ],
         componentPath: 'pages/index.tsx',

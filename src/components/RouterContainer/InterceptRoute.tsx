@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { RouterContext, Routers } from "./Routers"
 import { Route } from 'react-router-dom'
 import { LazyComponent } from './LazyComponent'

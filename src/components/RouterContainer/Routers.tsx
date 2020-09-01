@@ -1,8 +1,7 @@
 import React, { createContext, ReactElement, FC, useContext } from "react";
-import { RouteParams, RouterParams } from ".";
+import { RouterParams } from ".";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { LazyComponent } from "./LazyComponent";
-import NoMatch from "@/pages/__Component/NoMatch";
 
 export const RouterContext = createContext<ReactElement | null>(null);
 
@@ -26,7 +25,7 @@ export const Routers: FC<RouterParams> = ({ intercept, routers, noMatch }) => {
             {routers.map((route: any, index: number) =>
                 // 此处返回拦截路由，详见InterceptRoute，由于再次包装以后Switch无法识别Route了，所以不使用InterceptRoute而直接使用其解构。
                 (intercept && intercept(route)) || (route.child.length ?
-                    <RouterContext.Provider value={<Routers routers={route.child} />} key={index}>
+                    <RouterContext.Provider value={<Routers routers={route.child} noMatch={noMatch} />} key={index}>
                         <Route exact={!!route.exact} path={route.path} render={() =>
                             route.component ? <route.component /> :
                                 <LazyComponent componentPath={route.componentPath} />
@@ -40,7 +39,7 @@ export const Routers: FC<RouterParams> = ({ intercept, routers, noMatch }) => {
                     }></Route>)
             )}
             {defaultRouter && <Redirect exact from={fromPath || '/'} to={defaultRouter.path} />}
-            <Route path='/*' render={()=><NoMatch/>} />
+            <Route path='/*' render={noMatch} />
         </Switch>
     )
 }

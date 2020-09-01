@@ -158,7 +158,12 @@ module.exports = function (webpackEnv) {
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
-      'core-js/es', 'react-app-polyfill/ie9', 'react-app-polyfill/stable',
+      // 兼容包
+      'core-js/es',
+      'react-app-polyfill/ie9',
+      'react-app-polyfill/stable',
+      // mobx警告
+      'mobx-react-lite/batchingForReactDom',
       // Include an alternative client for WebpackDevServer. A client's job is to
       // connect to WebpackDevServer by a socket and get notified about changes.
       // When you save a file, the client will either apply hot updates (in case

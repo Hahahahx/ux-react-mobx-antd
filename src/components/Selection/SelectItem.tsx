@@ -1,12 +1,10 @@
 import React, {
-    CSSProperties,
     FC,
     forwardRef,
     useContext,
     useEffect,
     useImperativeHandle,
-    useRef,
-    useState
+    useRef
 } from 'react';
 import { SelectionContext } from '@/components/Selection/index';
 
@@ -50,7 +48,7 @@ const SelectItem: FC<SelectItemProps> = ({ children, unSelected, setChild, selec
         return () => {
             context.delete(_this);
         };
-    }, [disabled]);
+    }, [disabled, _this, context]);
     return (
         <Item ref={ref} setChild={setChild} selected={selected} unSelected={unSelected}>{children}</Item>
     );
@@ -93,6 +91,6 @@ const Item = forwardRef((props: any, ref: any) => {
     console.log('11')
 
     return (
-        <div ref={ref => _this = setRef(ref)} style={{width:'100%',height:'100%'}}>{React.Children.only(props.children)}</div>
+        <div ref={ref => _this = setRef(ref)} style={{ width: '100%', height: '100%' }}>{React.Children.only(props.children)}</div>
     );
 });

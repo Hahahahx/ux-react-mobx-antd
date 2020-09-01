@@ -1,20 +1,23 @@
-import React, { useEffect } from 'react'
-import { usePageStore } from '@/components/Provider/PageProvider'
+import React from 'react'
+import { Button } from 'antd'
+import { useBusineesStore } from '@/components/Provider/BusinessProvider'
 
 
 
 const Main = () => {
 
-    const { setLoading } = usePageStore(({ PageModule }) => ({
-        setLoading: PageModule.setLoading
+    const { setUser } = useBusineesStore(({ UserModule }) => ({
+        setUser: UserModule.setUser
     }))
 
-    useEffect(() => {
-        setLoading(false)
-    }, [])
+    console.log('main')
 
-
-    return <div className='page'>Main-Page</div>
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <div className='page'>Main-Page</div>
+            <Button ghost onClick={()=>setUser()}>Toggle-Name</Button>
+        </div>
+    )
 }
 
 

@@ -3,14 +3,16 @@ import { useHistory } from 'react-router-dom';
 import { LinkToParams } from '.';
 
 
-export const LinkTo: FC<LinkToParams> = ({ to, intercept, children, style, className, onClick }) => {
+export const LinkTo: FC<LinkToParams> = ({ to, intercept, children, style, className, onClick, onRequest }) => {
 
     const history = useHistory();
 
     const isThisPage = (path: string) => {
         const location = window.location;
-        const { pathname } = location;
-        return path === pathname;
+        const { hash } = location;
+        // const { pathname } = location;
+        // console.log(path,location)
+        return '#' + path === hash;
     }
 
 
@@ -21,6 +23,7 @@ export const LinkTo: FC<LinkToParams> = ({ to, intercept, children, style, class
         const isThis = isThisPage(to);
         const go = intercept && await intercept({ to, location, isThis })
         if (!isThis) {
+            onRequest && onRequest(e)
             !go && history.push(to)
         }
     }

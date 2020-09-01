@@ -1,18 +1,9 @@
-import React, { useEffect } from 'react'
-import { usePageStore } from '@/components/Provider/PageProvider';
+import React from 'react'
 
 
 const Login = () => {
 
-    const { setLoading } = usePageStore(({ PageModule }) => ({
-        setLoading: PageModule.setLoading
-    }))
-
-    useEffect(() => {
-        setLoading(false)
-    }, [])
-
-
+    console.log('login')
     return <div className='page'>Login-Page</div>
 }
 

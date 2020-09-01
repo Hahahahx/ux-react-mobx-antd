@@ -1,25 +1,19 @@
-import { action, computed, observable, runInAction } from 'mobx'
+import { action, observable } from 'mobx'
 
 
 export class UserModule {
 
     @observable
-    user = 'asd'
-
-
-    @observable
-    userList = ['kk', 'cc']
-
+    user = 'UX'
 
 
     @action
     setUser = () => {
-        console.log('beizhixing ')
-        this.user = 'adgadg'
+        if(this.user === 'Hux'){
+            this.user = 'UX'
+        }else{
+            this.user = 'Hux'
+        }
     }
 
-    @action
-    setUserList = () => {
-        this.userList = ['dd', 'cc', 'as']
-    }
 }

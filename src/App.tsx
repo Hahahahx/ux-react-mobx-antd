@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter, HashRouter, Redirect } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Routers } from './components/RouterContainer/Routers';
 import { routeConfig } from '@/config/router';
-import './App.less';
 import NoMatch from './pages/__Component/NoMatch';
 
 function App() {

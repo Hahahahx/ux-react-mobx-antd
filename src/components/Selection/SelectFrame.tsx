@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, useContext, useEffect, useRef, memo, useMemo } from 'react';
+import React, { CSSProperties, FC, useContext, useEffect } from 'react';
 import { SelectionContext } from '@/components/Selection/index';
 import { throttle } from '@/utils/ButtonUtils';
 import './index.less'
@@ -26,7 +26,7 @@ const SelectFrame: FC<SelectFrameProps> = ({ positionLT, size, style, show, scro
         left: positionLT.left + 'px',
         top: positionLT.top + 'px',
         width: size.width + 'px',
-        height: size.height + 'px', 
+        height: size.height + 'px',
     }
 
 
@@ -41,9 +41,9 @@ const SelectFrame: FC<SelectFrameProps> = ({ positionLT, size, style, show, scro
     // 由于我们的选框是相对于可选区的，一旦加入了滚动条的设定后，一旦滚动条发生改变，一些我们期望被选中的可选对象
     // 就会被移出选框，且当视区向下滚动，视区上方的可选对象会被销毁，从而触发本不该被触发的unselected事件。
     const getSelectedItem = () => {
-        console.log(items)
-        items.forEach((v, k) => {
-            const  { offsetWidth,offsetHeight,offsetTop,offsetLeft } = v.element;
+
+        items.forEach((v) => {
+            const { offsetWidth, offsetHeight, offsetTop, offsetLeft } = v.element;
             // 每个可选对象的存在区
             scrollOffset = scrollOffset || 0
             const l = offsetWidth + offsetLeft;
@@ -67,16 +67,16 @@ const SelectFrame: FC<SelectFrameProps> = ({ positionLT, size, style, show, scro
         });
     };
 
-
+    // 限流判断
     const getSelectedItemSlow = throttle(getSelectedItem, 0)
 
-    // 选框的大小发生改变时，进行判断哪些对象是和选框发生碰撞的 ******//Issue 此处可进一步优化，选框大小的更新频率
+    // 选框的大小发生改变时，进行判断哪些对象是和选框发生碰撞的 
     useEffect(() => {
         items.size && getSelectedItemSlow();
-    }, [size]);
+    }, [items.size, getSelectedItemSlow]);
 
     return (
-        <div style={Istyle} className={`frame ${show?'show':'hidden'}`} ></div>
+        show ? <div style={Istyle} className='frame' /> : <></>
     );
 };
 

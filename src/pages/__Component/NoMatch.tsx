@@ -8,10 +8,11 @@ const NoMatch = () => {
     const { setLoading } = usePageStore(({ PageModule }) => ({
         setLoading: PageModule.setLoading
     }))
+    console.log('no-match')
 
     useEffect(() => {
         setLoading(false)
-    }, [])
+    }, [setLoading])
 
 
     return <div className='page'>NoMatch-404</div>

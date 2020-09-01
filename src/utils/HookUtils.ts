@@ -9,33 +9,33 @@
  * 你需要：
  *  在react函数组件中使用。
  */
-import {useEffect, useState, useRef} from 'react';
+import { useEffect, useState } from 'react';
 
-export function useMousePosition(listen = true,offset:{x:number,y:number}={x:0,y:0}) {
-    const [pos, setPos] = useState({x: 0, y: 0});
+export function useMousePosition(listen = true, offset: { x: number, y: number } = { x: 0, y: 0 }) {
+    const [pos, setPos] = useState({ x: 0, y: 0 });
     useEffect(() => {
         if (listen) {
             const handle = (ev: any) => {
-                setPos({x: ev.clientX-offset.x, y: ev.clientY-offset.y});
+                setPos({ x: ev.clientX - offset.x, y: ev.clientY - offset.y });
             };
             window.addEventListener('mousemove', handle);
             return () => {
                 window.removeEventListener('mousemove', handle);
             };
         }
-    }, [listen]);
+    }, [listen, offset]);
 
     return pos;
 }
 
-export function useDocumentEvent(eventName:string,handler:Function){
-    useEffect(()=>{
-        const listener = (event:any) =>{
+export function useDocumentEvent(eventName: string, handler: Function) {
+    useEffect(() => {
+        const listener = (event: any) => {
             handler(event)
         }
         document.addEventListener(eventName, listener);
         return () => {
             document.removeEventListener(eventName, listener);
         };
-    },[eventName,handler])
+    }, [eventName, handler])
 }
