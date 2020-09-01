@@ -1,6 +1,5 @@
 import { action, observable } from 'mobx'
 
-
 export class UserModule {
 
     @observable
