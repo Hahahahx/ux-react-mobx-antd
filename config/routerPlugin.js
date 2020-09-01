@@ -30,7 +30,7 @@ class RouterPlugin {
             if (!this.route || JSON.stringify(this.route) !== JSON.stringify(routers)) {
                 let str = JSON.stringify([routers], null, 4);
                 str = str.replace(/"/g, '')
-                console.log('[自动写入路由配置]   ======>   ', str)
+                console.log('[自动写入路由配置，成功]')
                 this.route = routers
                 fs.writeFileSync(
                     this.output + '/router.ts',
@@ -51,7 +51,7 @@ class RouterPlugin {
             const routers = getDir(this.pagePath, this.componentBase, staticRoute);
             let str = JSON.stringify([routers], null, 4);
             str = str.replace(/"/g, '')
-            console.log('[自动写入路由配置]   ======>   ', str)
+            console.log('√[自动写入路由配置，成功]')
 
             fs.writeFileSync(
                 this.output + '/router.ts',
@@ -87,7 +87,7 @@ function getDir(dir, componentBase, staticRoute, routePath) {
             if ('route' === path.basename(pathname, '.config')) {
                 component = JSON.parse(fs.readFileSync(pathname));
                 hasComponent = true;
-                console.log('==================>    ', component, Object.hasOwnProperty(component, 'noLazy'))
+                //console.log('==================>    ', component, Object.hasOwnProperty(component, 'noLazy'))
                 if (component.hasOwnProperty('noLazy') && component.noLazy) {
                     router.component = 'Page' + titleCase(path.basename(routePath))
                     staticRoute.push(`import Page${titleCase(path.basename(routePath))} from '@/${componentBase + routePath}/index.tsx';\n`)
@@ -116,7 +116,7 @@ function getDir(dir, componentBase, staticRoute, routePath) {
 
         return router;
     } catch (e) {
-        console.log('[失败]   ======>   ', e)
+        console.log('×[自动写入路由配置，失败]')
         return {}
     }
 }
