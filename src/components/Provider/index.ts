@@ -39,8 +39,8 @@ export const setModule = () => {
  * @param item
  * @param value
  */
-export const setItem = (module: string, key: string, value: any) => {
+export const setItemToSession = (module: string, key: string, value: any) => {
     const store = JSON.parse(Decrypt(Session.getItem(module)));
     store[key] = value
-    Session.setItem(module, Decrypt(JSON.stringify(store)));
+    Session.setItem(module, Encrypt(JSON.stringify(store)));
 };
