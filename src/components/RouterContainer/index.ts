@@ -20,6 +20,7 @@ export interface RouterParams {
 export interface InterceptRouteParams {
     intercept?: (route: RouteParams) => void | JSX.Element | ReactElement
     route: RouteParams
+    noMatch?: () => ReactElement | JSX.Element
 }
 
 export interface LinkToParams extends LinkParams {

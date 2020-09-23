@@ -15,9 +15,10 @@ interface SelectFrameProps {
     show: boolean
     style?: CSSProperties
     scrollOffset?: number
+    lock:boolean
 }
 
-const SelectFrame: FC<SelectFrameProps> = ({ positionLT, size, style, show, scrollOffset }) => {
+const SelectFrame: FC<SelectFrameProps> = ({ lock,positionLT, size, style, show, scrollOffset }) => {
 
 
     // 获取所有被挂载到context中的可选对象。
@@ -38,8 +39,9 @@ const SelectFrame: FC<SelectFrameProps> = ({ positionLT, size, style, show, scro
     //*****//Issue 当选框组件配合到react-window，虚拟滚动组件中时，我们根据渲染仍然能够得到部分可选对象，
     // 但它不是完整的（详细了解react-window渲染机制），且由于其滚动条的存在我们需要在此中再加入一个偏移值参与计算，
     // 即滚动条的滚动距离，我们可以直接在react-window的组件中取到该值，还是由于react-window的渲染机制，
-    // 由于我们的选框是相对于可选区的，一旦加入了滚动条的设定后，一旦滚动条发生改变，一些我们期望被选中的可选对象
+    // 我们的选框是相对于可选区的，一旦加入了滚动条的设定后，一旦滚动条发生改变，一些我们期望被选中的可选对象
     // 就会被移出选框，且当视区向下滚动，视区上方的可选对象会被销毁，从而触发本不该被触发的unselected事件。
+    // 解决为在拖动选框时不能滚动。
     const getSelectedItem = () => {
 
         items.forEach((v) => {
@@ -72,8 +74,8 @@ const SelectFrame: FC<SelectFrameProps> = ({ positionLT, size, style, show, scro
 
     // 选框的大小发生改变时，进行判断哪些对象是和选框发生碰撞的 
     useEffect(() => {
-        items.size && getSelectedItemSlow();
-    }, [items.size, getSelectedItemSlow]);
+        !lock && getSelectedItemSlow();
+    }, [lock, getSelectedItemSlow]);
 
     return (
         show ? <div style={Istyle} className='frame' /> : <></>

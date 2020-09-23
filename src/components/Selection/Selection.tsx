@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useMemo } from 'react';
+import React, { FC, useState, useRef, useMemo, CSSProperties } from 'react';
 import { useDocumentEvent, useMousePosition } from '@/utils/HookUtils';
 import { SelectionContext, store } from '@/components/Selection/index';
 import SelectFrame from '@/components/Selection/SelectFrame';
@@ -17,6 +17,8 @@ interface SelectionProps {
     scrollOffset?: number
     onBegin?: ({ x, y }: { x: number, y: number }) => any
     onEnd?: ({ x, y }: { x: number, y: number }) => any
+    style?: CSSProperties
+    className?: string
 }
 
 /**
@@ -27,7 +29,7 @@ interface SelectionProps {
  * 当可选区与浏览器坐标存在误差时需要一定的偏移值来确保选框的正确的绘制
  * @param scrollOffset 计算滚动条的偏移值
  */
-const Selection: FC<SelectionProps> = ({ children, disabledSelection, offset, scrollOffset, onBegin, onEnd }) => {
+const Selection: FC<SelectionProps> = ({ style, className, children, disabledSelection, offset, scrollOffset, onBegin, onEnd }) => {
 
 
     // 获取鼠标位置（相对于浏览器页面）
@@ -49,8 +51,8 @@ const Selection: FC<SelectionProps> = ({ children, disabledSelection, offset, sc
     // 可选区对象
     const Dref = useRef<any>();
 
-    const onMouseDown = () => {
-        if (!disabled) {
+    const onMouseDown = (e: any) => {
+        if (!disabled && !e.button) {
             offset = offset || { x: 0, y: 0 }
             /**
              * 限制SelectFrame（选框）只能局限在可选区内生成。
@@ -71,10 +73,10 @@ const Selection: FC<SelectionProps> = ({ children, disabledSelection, offset, sc
         }
     };
 
-    const onMouseMove = () => {
-        if (!lock) {
+    const onMouseMove = (e: any) => {
+        if (!lock && !e.button) {
             // 展示选框
-            !show && setShow(true) 
+            !show && setShow(true)
             // 选框的偏移值是取决于左上角的点，所以只有更小（更接近0，0）的坐标能取决其偏移值
             const left = Math.min(x, start.x);
             const top = Math.min(y, start.y);
@@ -87,14 +89,16 @@ const Selection: FC<SelectionProps> = ({ children, disabledSelection, offset, sc
         }
     };
 
-    const onMouseUp = () => {
-        // 结束选框的绘制
-        setLock(true);
-        // 隐藏选框
-        setShow(false);
-        setPositionLT({ left:0, top:0 });
-        setSize({ width:0, height:0 });
-        onEnd && onEnd({ x, y })
+    const onMouseUp = (e: any) => {
+        if (!e.button) {
+            // 结束选框的绘制
+            setLock(true);
+            // 隐藏选框
+            setShow(false);
+            setPositionLT({ left: 0, top: 0 });
+            setSize({ width: 0, height: 0 });
+            onEnd && onEnd({ x, y })
+        }
     };
 
     // 将事件绑定到Dom对象中
@@ -104,10 +108,10 @@ const Selection: FC<SelectionProps> = ({ children, disabledSelection, offset, sc
 
     // 为了避免高频渲染，你应该在children组件中加入memo
     return (
-        <div ref={Dref} className='selection'>
+        <div ref={Dref} style={style} className={`selection ${className ? className : ''}`}>
             <SelectionContext.Provider value={store}>
                 {children}
-                <SelectFrame scrollOffset={scrollOffset} show={show} positionLT={positionLT} size={size} />
+                <SelectFrame lock={lock} scrollOffset={scrollOffset} show={show} positionLT={positionLT} size={size} />
 
             </SelectionContext.Provider>
         </div>

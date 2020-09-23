@@ -54,7 +54,7 @@ const SelectItem: FC<SelectItemProps> = ({ children, unSelected, setChild, selec
     );
 };
 
-export default SelectItem;
+export default React.memo(SelectItem,()=>true);
 
 
 const Item = forwardRef((props: any, ref: any) => {
@@ -70,12 +70,12 @@ const Item = forwardRef((props: any, ref: any) => {
             element: { offsetWidth: _this.offsetWidth, offsetHeight: _this.offsetHeight, offsetTop: _this.offsetTop, offsetLeft: _this.offsetLeft },
             // 进入选框中，触发事件
             beSelected() {
-                props.selected && props.selected();
+                props.selected && props.selected(_this);
                 // console.log('被选中了');
             },
             // 从选框中脱离，触发事件
             beUnSelected() {
-                props.unSelected && props.unSelected();
+                props.unSelected && props.unSelected(_this);
                 // console.log('落选了');
             }
         })
@@ -87,8 +87,6 @@ const Item = forwardRef((props: any, ref: any) => {
     const setRef = (ref: any) => {
         return props.setChild ? props.setChild(ref) : ref;
     };
-
-    console.log('11')
 
     return (
         <div ref={ref => _this = setRef(ref)} style={{ width: '100%', height: '100%' }}>{React.Children.only(props.children)}</div>
